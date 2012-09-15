@@ -1,0 +1,25 @@
+<h1>Listing hairstyles</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Count</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @hairstyles.each do |hairstyle| %>
+  <tr>
+    <td><%= hairstyle.name %></td>
+    <td><%= hairstyle.count %></td>
+    <td><%= link_to 'Show', hairstyle %></td>
+    <td><%= link_to 'Edit', edit_hairstyle_path(hairstyle) %></td>
+    <td><%= link_to 'Destroy', hairstyle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Hairstyle', new_hairstyle_path %>

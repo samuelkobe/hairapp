@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @hairstyle.name %>
+</p>
+
+<p>
+  <b>Count:</b>
+  <%= @hairstyle.count %>
+</p>
+
+
+<%= link_to 'Edit', edit_hairstyle_path(@hairstyle) %> |
+<%= link_to 'Back', hairstyles_path %>
