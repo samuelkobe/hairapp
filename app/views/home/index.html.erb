@@ -1,6 +1,6 @@
 
     <div class="row-fluid main_header">
-     <div class="span6"><h1 class="upper">Samuel Kobe</h1></div>
+     <div class="span6"><h1 class="upper">Cut My Hair</h1></div>
 
 
   
@@ -17,3 +17,9 @@
 		<div class="span3 offset9 orange_bg"></div>
 		
 	</div>
+  <div id="hairstyles">
+	<% Hairstyle.all.each do |hairstyle| %>
+		<%= hairstyle.name %>
+		<%= hairstyle.count %>
+	<% end %>
+  </div>
