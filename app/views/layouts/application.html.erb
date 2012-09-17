@@ -10,5 +10,11 @@
 
 <%= yield %>
 
+<script>
+$("input").click(function() {
+  $("#log").html( $(":checked").val() + " is checked!" );
+});
+</script>
+
 </body>
 </html>

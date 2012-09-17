@@ -1,4 +1,8 @@
 class HairstylesController < ApplicationController
+  
+  / UNCOMMENT TO BREAK !
+  before_filter :ip_check, :only => [:vote]
+  /
   # GET /hairstyles
   # GET /hairstyles.json
   def index
@@ -68,6 +72,14 @@ class HairstylesController < ApplicationController
       end
     end
   end
+  
+  def vote
+    if @hairstyle = Hairstyle.find(params[:id])
+      @hairstyle.increment('count')
+      @hairstyle.save
+      redirect_to root_url, notice: 'Thanks for Voting'
+    end
+  end
 
   # DELETE /hairstyles/1
   # DELETE /hairstyles/1.json
@@ -79,5 +91,11 @@ class HairstylesController < ApplicationController
       format.html { redirect_to hairstyles_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  
+  def ip_check
+    redirect_to :action => 'vote', :id => params[:id]
   end
 end

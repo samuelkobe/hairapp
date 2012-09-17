@@ -1,17 +1,33 @@
+* {
+	margin:0px;
+	padding:0px;
+}
+
+$whites: #fff;
 $blacks: #222;
-$oranges: #ee712a;
+$orange: #ff8400;
 @mixin uppercase {
  text-transform:uppercase;
  font-size:62px;
  text-align:right;
 
 }
+@mixin sub_header {
+	text-transform:uppercase;
+	font-size:32px;
+	margin-top:200px;
+	margin-left:24px;
+}
 @mixin top_padding{
 	padding-top:30px;
 }
+
 html, body{height:100%;}
 
+body{background:url('samuelkobe.png') no-repeat right;background-size:auto 100%;}
 .upper{@include uppercase;}
+.sub{@include sub_header;}
 .main_header{@include top_padding;}
 .bar_bg{background:$blacks}
-.orange_bg{background:$oranges;bottom:0;}
+.white_text{font-size:18px;	margin-top:24px;padding:2px 5px;list-style-type:none;color:$whites;}
+.white_text span.orange{color:$orange;}

@@ -1,25 +1,38 @@
 
     <div class="row-fluid main_header">
-     <div class="span6"><h1 class="upper">Cut My Hair</h1></div>
-
-
-  
-
-
+    	<div class="span6"><h1 class="upper">Cut My Hair</h1></div>
 	</div><!-- end of row-fluid-->
 
-	<div class="row-fluid" id="black_bar">
-		
-	 <div class="span6 bar_bg"></div>
+	<div class="row-fluid">
+		<div class="span6 bar_bg white_text"><%= flash[:notice] %></div>
 	</div><!-- end of bar_black-->
 	
-	<div class="row-fluid" id="orange_bar" >
-		<div class="span3 offset9 orange_bg"></div>
-		
-	</div>
-  <div id="hairstyles">
+	<div class="row-fluid">
+		<div class="span6">
+		<ul>
+			<li class="bar_bg white_text">My hair, yeah it needs to go.</li>
+				
+			<li class="bar_bg white_text"><span class="orange">"Why's this concern me?"</span>, you might ask.</li> 
+			
+			<li class="bar_bg white_text">Well my good people, I can't decide what to do, so help me out.</li>
+		</ul>
+		</div>
+	</div><!-- end of bar_black-->
+	
+	<div class="row-fluid">
+    	<div class="span12"><h2 class="sub">Vote For:</h2></div>
+	</div><!-- end of row-fluid-->
+	
+  <div class="row-fluid" id="hairstyles">
+	<%= form_tag(:controller => 'hairstyles', :action => 'vote') do %>
 	<% Hairstyle.all.each do |hairstyle| %>
-		<%= hairstyle.name %>
-		<%= hairstyle.count %>
+	<ul style="float:left;">
+		<li><%= radio_button_tag 'id', hairstyle.id %></li>
+		<li class="name"><%= hairstyle.name %></li>
+		<li class="count"><%= hairstyle.count %></li>
+	</ul>
 	<% end %>
+	  <%= submit_tag 'Vote' %>
+	<% end %>
+	<div id="log"></div>
   </div>
