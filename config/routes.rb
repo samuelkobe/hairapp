@@ -1,6 +1,4 @@
 Hairapp::Application.routes.draw do
-  resources :hairstyles
-  
   resources :hairstyles do
     post 'vote', :on => :collection
   end

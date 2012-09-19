@@ -6,6 +6,7 @@
 $whites: #fff;
 $blacks: #222;
 $orange: #ff8400;
+$navy: #3B5998;
 @mixin uppercase {
  text-transform:uppercase;
  font-size:62px;
@@ -15,8 +16,9 @@ $orange: #ff8400;
 @mixin sub_header {
 	text-transform:uppercase;
 	font-size:32px;
-	margin-top:200px;
+	margin-top:75px;
 	margin-left:24px;
+	text-align:right;
 }
 @mixin top_padding{
 	padding-top:30px;
@@ -28,6 +30,8 @@ body{background:url('samuelkobe.png') no-repeat right;background-size:auto 100%;
 .upper{@include uppercase;}
 .sub{@include sub_header;}
 .main_header{@include top_padding;}
-.bar_bg{background:$blacks}
+.bar_bg{background:$blacks;border:0px solid red; border-bottom-right-radius:10px}
 .white_text{font-size:18px;	margin-top:24px;padding:2px 5px;list-style-type:none;color:$whites;}
 .white_text span.orange{color:$orange;}
+.notices{color:$orange;font-size:18px;padding:5px;}
+#log{font-size:32px;margin-top:75px;padding:10px;}

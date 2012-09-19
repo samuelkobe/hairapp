@@ -1,3 +1,3 @@
 class Blacklist < ActiveRecord::Base
-  attr_accessible :ip
+  attr_accessible :ip, :hairstyle_id
 end

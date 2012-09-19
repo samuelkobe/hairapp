@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120915024129) do
+ActiveRecord::Schema.define(:version => 20120919055527) do
+
+  create_table "blacklists", :force => true do |t|
+    t.string   "ip"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "hairstyle_id"
+  end
 
   create_table "hairstyles", :force => true do |t|
     t.string   "name"

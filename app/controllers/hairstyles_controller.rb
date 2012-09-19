@@ -1,8 +1,5 @@
 class HairstylesController < ApplicationController
   
-  / UNCOMMENT TO BREAK !
-  before_filter :ip_check, :only => [:vote]
-  /
   # GET /hairstyles
   # GET /hairstyles.json
   def index
@@ -29,7 +26,7 @@ class HairstylesController < ApplicationController
   # GET /hairstyles/new.json
   def new
     @hairstyle = Hairstyle.new
-
+    @hairstyle.count = 0 # value in forum is now initialized
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @hairstyle }
@@ -74,12 +71,24 @@ class HairstylesController < ApplicationController
   end
   
   def vote
-    if @hairstyle = Hairstyle.find(params[:id])
-      @hairstyle.increment('count')
-      @hairstyle.save
-      redirect_to root_url, notice: 'Thanks for Voting'
+      if !@hairstyle = Hairstyle.find_by_id(params[:id])
+        redirect_to root_url, notice: 'Please select at least one hairstyle'
+      else
+        @client_ip = request.remote_ip
+         blacklist = Blacklist.where(:ip => @client_ip).order("created_at DESC").first
+        if blacklist && blacklist.created_at > 1.day.ago
+          @comeback = ((blacklist.created_at-1.day.ago)/3600).to_int
+          redirect_to root_url, notice: "Looks like you've voted recently, come back in #{@comeback}hr(s)"
+        else
+          if @hairstyle = Hairstyle.find_by_id(params[:id])
+            @hairstyle.increment('count')
+            @hairstyle.save
+            Blacklist.create(:ip => @client_ip, :hairstyle_id => params[:id])
+            redirect_to root_url, notice: 'Thanks for voting! Come back in 24hrs and vote again.'
+          end
+        end
+      end
     end
-  end
 
   # DELETE /hairstyles/1
   # DELETE /hairstyles/1.json
@@ -91,11 +100,5 @@ class HairstylesController < ApplicationController
       format.html { redirect_to hairstyles_url }
       format.json { head :no_content }
     end
-  end
-  
-  private
-  
-  def ip_check
-    redirect_to :action => 'vote', :id => params[:id]
-  end
+  end  
 end
